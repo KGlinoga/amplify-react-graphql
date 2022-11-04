@@ -51,8 +51,9 @@ const App = ({ signOut }) => {
       description: form.get("description"),
       image: image.name,
     };
-    if (!!data.image) await Storage.put(data.name, image);
-    
+    if (!data.image) { await Storage.put(data.name, image) }
+    else { Storage.put(data.name, image)};
+
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
@@ -104,7 +105,7 @@ const App = ({ signOut }) => {
             </View>
 
           <Button type="submit" variation="primary"
-            // onClick={() => createNote()}
+            // onClick={createNote} OK just tested a bunch and this line is a DEF no. 11/5 KG
           >
             Create Note
           </Button>
