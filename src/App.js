@@ -52,6 +52,7 @@ const App = ({ signOut }) => {
       image: image.name,
     };
     if (!!data.image) await Storage.put(data.name, image);
+    
     await API.graphql({
       query: createNoteMutation,
       variables: { input: data },
@@ -63,7 +64,7 @@ const App = ({ signOut }) => {
   async function deleteNote({ id }) {
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
-    await Storage.remove(name);
+    await Storage.remove(notes.name);
     await API.graphql({
       query: deleteNoteMutation,
       variables: { input: { id } },
@@ -73,7 +74,9 @@ const App = ({ signOut }) => {
   return (
     <View className="App">
       <Heading level={1}>My Notes App</Heading>
-      <View as="form" margin="3rem 0" onSubmit={createNote}>
+      <View as="form" margin="3rem 0"
+        onSubmit={createNote}
+      >
         <Flex direction="row" justifyContent="center">
           <TextField
             name="name"
@@ -97,13 +100,18 @@ const App = ({ signOut }) => {
             as="input"
             type="file"
             style={{ alignSelf: "end" }}
-          />
+          >
+            </View>
 
-          <Button type="submit" variation="primary">
+          <Button type="submit" variation="primary"
+            // onClick={() => createNote()}
+          >
             Create Note
           </Button>
+
         </Flex>
       </View>
+
       <Heading level={2}>Current Notes</Heading>
       <View margin="3rem 0">
         {notes.map((note) => (
