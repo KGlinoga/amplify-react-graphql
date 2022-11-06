@@ -1,3 +1,7 @@
+From the AWS Quick Start/Get Started tutorial.  
+- There are currently a few UI/display bugs (like the notes won't display??) to fix before deployment.  
+- See coding journal 2 for more details
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
